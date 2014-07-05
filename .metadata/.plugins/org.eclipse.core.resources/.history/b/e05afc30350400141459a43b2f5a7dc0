@@ -1,0 +1,21 @@
+package com.veeva.record;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+public class RecordModle {
+	
+	public ArrayList<String> recordHeader;
+	public ArrayList<ArrayList<Map<String,String>>> recordData;
+	
+	public RecordModle(){
+		this.recordHeader = new ArrayList<String>();
+		this.recordData = new ArrayList<ArrayList<Map<String,String>>>();
+	}
+	
+	public void sort(){
+		
+	}
+
+
+}

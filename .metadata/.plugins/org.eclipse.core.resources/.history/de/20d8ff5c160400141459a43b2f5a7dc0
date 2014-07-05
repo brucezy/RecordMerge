@@ -1,0 +1,5 @@
+package com.veeva.record;
+
+public interface FileParser {
+
+}

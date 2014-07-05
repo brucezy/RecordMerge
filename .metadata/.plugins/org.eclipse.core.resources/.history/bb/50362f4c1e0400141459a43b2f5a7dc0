@@ -1,0 +1,30 @@
+package com.veeva.record;
+
+import java.io.File;
+
+import org.jsoup.*;
+import org.jsoup.nodes.Document;
+
+public class HTMLRecordModle extends RecordModle implements FileParser {
+
+	public HTMLRecordModle() {
+		super();
+	}
+
+	@Override
+	public void readHeader(File input) {
+		
+		Jsoup.parse(in, charsetName)
+		
+		Document doc = Jsoup.parse(input, "UTF-8", "http://www.jb51.net/");
+
+
+	}
+
+	@Override
+	public void readData(File input) {
+		
+
+	}
+
+}

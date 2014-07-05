@@ -1,0 +1,22 @@
+package com.veeva.record;
+
+public class CSVRecordModle extends RecordModle implements FileParser {
+
+	public CSVRecordModle() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
+
+	@Override
+	public void readHeader() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void readData() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

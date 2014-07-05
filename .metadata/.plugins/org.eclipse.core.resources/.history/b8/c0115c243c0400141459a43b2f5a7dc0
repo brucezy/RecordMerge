@@ -1,0 +1,16 @@
+package com.veeva.record;
+
+public class FileModelFactory {
+
+	RecordModle instance = null;
+	
+	public FileModelFactory(String fileType) {
+		
+		
+	}
+	
+	public RecordModle getInstance(){
+		return instance;
+	}
+
+}

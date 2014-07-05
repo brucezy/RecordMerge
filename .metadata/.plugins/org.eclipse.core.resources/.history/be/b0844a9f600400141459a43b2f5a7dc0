@@ -1,0 +1,43 @@
+package com.veeva.record;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+
+public abstract class RecordModle {
+	
+	public ArrayList<String> recordHeader;
+	public ArrayList<HashMap<String,String>> recordData;
+	
+	public RecordModle(){
+		this.recordHeader = new ArrayList<String>();
+		this.recordData = new ArrayList<HashMap<String,String>>();
+	}
+	
+	public void sort(){
+		
+		Collections.sort(recordData, new Comparator<Object>() {
+		      @Override
+		      public int compare(Object o1, Object o2) {
+		    	@SuppressWarnings("unchecked")
+				HashMap<String, String> obj1= (HashMap<String, String>) o1;
+		    	@SuppressWarnings("unchecked")
+				HashMap<String, String> obj2= (HashMap<String, String>) o2;
+		    	
+		        return Integer.parseInt(obj1.get("ID").toString())-(Integer.parseInt(obj2.get("ID").toString()));
+		     
+		      }
+		    });
+		
+	}
+	
+	abstract public void initialize(File input);
+	
+	abstract public void readHeader(File input);
+	
+	abstract public void readData(File input);
+
+
+}

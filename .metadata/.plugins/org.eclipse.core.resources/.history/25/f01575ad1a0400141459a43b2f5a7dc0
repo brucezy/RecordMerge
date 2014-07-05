@@ -1,0 +1,35 @@
+package com.veeva.record;
+
+import java.util.ArrayList;
+
+public class RecordModle {
+	
+	private ArrayList<String> recordHeader;
+	private ArrayList<ArrayList<String>> recordData;
+	
+	public RecordModle(){
+		setRecordHeader(new ArrayList<String>());
+		setRecordData(new ArrayList<ArrayList<String>>());
+	}
+	
+	public void sort(){
+		
+	}
+
+	public ArrayList<String> getRecordHeader() {
+		return recordHeader;
+	}
+
+	public void setRecordHeader(ArrayList<String> recordHeader) {
+		this.recordHeader = recordHeader;
+	}
+
+	public ArrayList<ArrayList<String>> getRecordData() {
+		return recordData;
+	}
+
+	public void setRecordData(ArrayList<ArrayList<String>> recordData) {
+		this.recordData = recordData;
+	}
+
+}

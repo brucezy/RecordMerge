@@ -1,0 +1,8 @@
+package com.veeva.record;
+
+public interface FileReader {
+	
+	public void readHeader();
+	public void readData();
+
+}

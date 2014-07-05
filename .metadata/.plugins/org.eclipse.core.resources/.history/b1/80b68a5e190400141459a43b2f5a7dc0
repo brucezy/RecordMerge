@@ -1,0 +1,13 @@
+package com.veeva.record;
+
+import java.util.ArrayList;
+
+public class RecordModel {
+	
+	private ArrayList<String> recordHeader;
+	
+	public RecordModel(){
+		this.recordHeader = new ArrayList<String>();
+	}
+
+}

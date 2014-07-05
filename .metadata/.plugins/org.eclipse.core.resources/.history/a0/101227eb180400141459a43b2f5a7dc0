@@ -1,0 +1,19 @@
+package com.veeva.record;
+
+import java.io.*;
+
+public class CSVFileParser implements FileParser {
+
+	@Override
+	public void readHeader() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void readData() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

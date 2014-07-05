@@ -1,0 +1,22 @@
+package com.veeva.record;
+
+public class FileModelFactory {
+
+	RecordModle instance = null;
+	
+	public FileModelFactory(String fileType) {
+		switch(fileType){
+		case "HTML":
+			break;
+			
+		case "CSV":
+			break;
+		}
+		
+	}
+	
+	public RecordModle getInstance(){
+		return instance;
+	}
+
+}

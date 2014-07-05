@@ -1,0 +1,23 @@
+package com.veeva.record;
+
+import java.io.File;
+import org.jsoup.*;
+
+public class HTMLRecordModle extends RecordModle implements FileParser {
+
+	public HTMLRecordModle() {
+		super();
+	}
+
+	@Override
+	public void readHeader(File input) {
+
+	}
+
+	@Override
+	public void readData(File input) {
+		
+
+	}
+
+}
