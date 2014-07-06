@@ -58,6 +58,9 @@ public class HTMLRecordModle extends RecordModle{
 			for(Element tr: trs){
 				Elements tds = tr.getElementsByTag("td");
 				
+				if (tds.size() == 0)
+					continue;
+				
 				int i = 0;
 				HashMap<String, String> keyValue = new HashMap<String, String>();
 				

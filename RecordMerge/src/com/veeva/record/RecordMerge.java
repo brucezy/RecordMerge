@@ -76,7 +76,7 @@ public class RecordMerge {
 			}
 		}
 		
-		/*
+		
 		for(RecordModle recordModle : recordList){
 			if(recordModle.recordData.size()>1)
 				Collections.sort(recordModle.recordData, new Comparator<HashMap<String, String>>() {
@@ -88,9 +88,8 @@ public class RecordMerge {
 					}
 			    });
 	
-			}
 		}
-		*/
+		
 		
 		//Consolidation all file and merge duplicated record
 		FileModelFactory fileFactory = new FileModelFactory("CSV");
@@ -123,10 +122,11 @@ public class RecordMerge {
 		for(RecordModle recordModle : recordList){
 			
 			ArrayList<HashMap<String,String>> tempOutputData = new ArrayList<HashMap<String,String>>();
-			HashMap<String, String> outputRow = new HashMap<String, String>();
 			
 			if(i == 0){	
 				for(HashMap<String, String> map : recordModle.recordData){
+					HashMap<String, String> outputRow = new HashMap<String, String>();
+					
 					for(String s: outputRecord.recordHeader){
 						
 						if(map.containsKey(s)){
@@ -137,23 +137,22 @@ public class RecordMerge {
 						}
 					}
 					tempOutputData.add(outputRow);
-					outputRow.clear();
+					outputRow = null;
 				}
 				outputData = tempOutputData;
-				//tempOutputData = null;
+				tempOutputData = null;
 			}
 			else{
-				int indexFirst, indexSecond;
+				int indexFirst = 0, indexSecond = 0;
 				
-				for(indexFirst = 0,  indexSecond = 0; 
-					indexFirst < outputData.size() && indexSecond < recordModle.recordData.size();
-					indexFirst++, indexSecond++){
+				while(indexFirst < outputData.size() && indexSecond < recordModle.recordData.size()){
 					
 					HashMap<String,String> mapFirst = outputData.get(indexFirst);
 					HashMap<String,String> mapSecond = recordModle.recordData.get(indexSecond);
+					HashMap<String, String> outputRow = new HashMap<String, String>();
 					
 					if (mapFirst.get("ID").compareTo(mapSecond.get("ID")) < 0){
-						for(String s: recordModle.recordHeader){
+						for(String s: outputRecord.recordHeader){
 							
 							if(mapFirst.containsKey(s)){
 								outputRow.put(s,mapFirst.get(s).toString());
@@ -163,31 +162,32 @@ public class RecordMerge {
 							}
 						}
 						tempOutputData.add(outputRow);
-						outputRow.clear();
+						outputRow = null;
 						
 						indexFirst++;
 					}
 					else if(mapFirst.get("ID").compareTo(mapSecond.get("ID")) == 0){
-						for(String s: recordModle.recordHeader){
+						for(String s: outputRecord.recordHeader){
 							
-							if(mapFirst.containsKey(s)){
+							if(mapFirst.containsKey(s) && mapFirst.get(s).toString() != ""){
 								outputRow.put(s,mapFirst.get(s).toString());
 							}
-							else if(mapSecond.containsKey(s)){
+							else if(mapSecond.containsKey(s) && mapSecond.get(s).toString() != ""){
 								outputRow.put(s,mapSecond.get(s).toString());
 							}
 							else{
 								outputRow.put(s,"");
 							}
+				
 						}
 						tempOutputData.add(outputRow);
-						outputRow.clear();
+						outputRow = null;
 						
 						indexFirst++;
 						indexSecond++;
 					}
-					else{
-						for(String s: recordModle.recordHeader){
+					else if (mapFirst.get("ID").compareTo(mapSecond.get("ID")) > 0) {
+						for(String s: outputRecord.recordHeader){
 							
 							if(mapSecond.containsKey(s)){
 								outputRow.put(s,mapSecond.get(s).toString());
@@ -197,7 +197,7 @@ public class RecordMerge {
 							}
 						}
 						tempOutputData.add(outputRow);
-						outputRow.clear();
+						outputRow = null;
 
 						indexSecond++;
 					}
@@ -208,8 +208,9 @@ public class RecordMerge {
 					
 					while(indexFirst < outputData.size()){
 						HashMap<String,String> mapFirst = outputData.get(indexFirst);
+						HashMap<String, String> outputRow = new HashMap<String, String>();
 						
-						for(String s: recordModle.recordHeader){
+						for(String s: outputRecord.recordHeader){
 							
 							if(mapFirst.containsKey(s)){
 								outputRow.put(s,mapFirst.get(s).toString());
@@ -219,7 +220,7 @@ public class RecordMerge {
 							}
 						}
 						tempOutputData.add(outputRow);
-						outputRow.clear();
+						outputRow = null;
 						indexFirst++;
 					}
 				}
@@ -227,7 +228,9 @@ public class RecordMerge {
 					
 					while(indexSecond < recordModle.recordData.size()){
 						HashMap<String,String> mapSecond = recordModle.recordData.get(indexSecond);
-						for(String s: recordModle.recordHeader){
+						HashMap<String, String> outputRow = new HashMap<String, String>();
+						
+						for(String s: outputRecord.recordHeader){
 							
 							if(mapSecond.containsKey(s)){
 								outputRow.put(s,mapSecond.get(s).toString());
@@ -237,22 +240,24 @@ public class RecordMerge {
 							}
 						}
 						tempOutputData.add(outputRow);
-						outputRow.clear();
+						outputRow = null;
 						indexSecond++;
 					}
 				}
 				
 				outputData = tempOutputData;
-				//tempOutputData = null;
+				tempOutputData = null;
 			}
 			
 			i++;
 		}
+		outputRecord.recordData = outputData;
+		outputData = null;
 		
 		//Write to .csv file
 		OutputStreamWriter outStream = new OutputStreamWriter(new FileOutputStream("combined.csv"));
 		@SuppressWarnings("resource")
-		CSVWriter csvWriter = new CSVWriter(outStream,',', CSVWriter.NO_QUOTE_CHARACTER);
+		CSVWriter csvWriter = new CSVWriter(outStream,',', CSVWriter.DEFAULT_QUOTE_CHARACTER);
 		
 		//write header
 		csvWriter.writeNext(outputRecord.recordHeader.toArray(new String[outputRecord.recordHeader.size()]));
@@ -264,6 +269,7 @@ public class RecordMerge {
 				dataRow.add(map.get(s));
 			}
 			csvWriter.writeNext(dataRow.toArray(new String[dataRow.size()]));
+			dataRow.clear();
 		}
 		
 		//close
