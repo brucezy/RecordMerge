@@ -68,20 +68,14 @@ public class RecordMerge {
 				fileReader.initialize(input);
 				fileReader.readHeader();
 				fileReader.readData();
+				if(fileReader.data.recordData.size()>1)
+					fileReader.data.sortByKey("ID");
 			}
 		}
 		
-		//sort data entry in each record file
 		for(RecordData recordData : recordList){
 			if(recordData.recordData.size()>1)
-				Collections.sort(recordData.recordData, new Comparator<HashMap<String, String>>() {
-				      @Override
-				    public int compare(HashMap<String, String> obj1, HashMap<String,String> obj2) {
-		
-				    	  return Integer.parseInt(obj1.get("ID").toString())- Integer.parseInt(obj2.get("ID").toString());
-					     
-					}
-			    });
+				recordData.sortByKey("ID");
 		}
 		
 		RecordDataCombination dataCombine = new RecordDataCombination(recordList);
