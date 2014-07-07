@@ -75,4 +75,9 @@ public class HTMLRecordFileReader extends RecordFileReader {
 		}
 	}
 
+	@Override
+	public void closeFile() {
+		
+	}
+
 }

@@ -15,5 +15,7 @@ public abstract class RecordFileReader {
 	abstract public void readHeader();
 	
 	abstract public void readData();
+	
+	abstract public void closeFile();
 
 }

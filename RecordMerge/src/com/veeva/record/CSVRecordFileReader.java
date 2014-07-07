@@ -12,6 +12,7 @@ import au.com.bytecode.opencsv.CSVReader;
 public class CSVRecordFileReader extends RecordFileReader {
 	
 	private CSVReader reader;
+	private InputStreamReader inputStream;
 	
 	public CSVRecordFileReader() {
 		super();
@@ -20,10 +21,9 @@ public class CSVRecordFileReader extends RecordFileReader {
 	@Override
 	public void initialize(File input) {
 		try {
-			InputStreamReader inputStream = new InputStreamReader(new FileInputStream(input));
+			inputStream = new InputStreamReader(new FileInputStream(input));
 			this.reader = new CSVReader(inputStream);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -35,14 +35,12 @@ public class CSVRecordFileReader extends RecordFileReader {
 		try {
 			temp = reader.readNext();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		for(String s : temp){
 			this.data.recordHeader.add(s);
 		}
-
 	}
 
 	@Override
@@ -55,17 +53,23 @@ public class CSVRecordFileReader extends RecordFileReader {
 				
 				for(String s: temp){	
 					keyValue.put(this.data.recordHeader.get(i),s);
-					//tempList.add(keyValue);
 					i++;
 				}
 				
 				this.data.recordData.add(keyValue);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
+	@Override
+	public void closeFile() {
+		try {
+			inputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

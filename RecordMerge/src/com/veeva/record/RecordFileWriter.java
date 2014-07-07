@@ -16,5 +16,5 @@ public abstract class RecordFileWriter {
 	
 	abstract public void writeData();
 	
-	abstract public void fileClose();
+	abstract public void closeFile();
 }

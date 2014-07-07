@@ -13,41 +13,45 @@ public class RecordDataCombination {
 		this.dataList = recordList;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void consolidateRecordHeaders(){
-		int i = 0;
 		
 		for(RecordData recordData: dataList){
-			if(i == 0)
-			{
-				this.data.recordHeader = (ArrayList<String>) recordData.recordHeader.clone();
-			} else {
-				for(String s: recordData.recordHeader){
-					if(!this.data.recordHeader.contains(s)){
-						this.data.recordHeader.add(s);
-					}
+			for(String s: recordData.recordHeader){
+				if(!this.data.recordHeader.contains(s)){
+					this.data.recordHeader.add(s);
 				}
 			}
-			i++;
 		}
+		
 	}
 	
 	public void consolidateRecordEntries(){
-		int i = 0;
+		
 		ArrayList<HashMap<String,String>> outputData = null;
 		
-		for(RecordData recordData : dataList){
+		if (dataList.size() == 0)
+			return;
+		
+		outputData = dataList.get(0).recordData;
+		
+		for(int i = 1; i < dataList.size();i++){
 			
 			ArrayList<HashMap<String,String>> tempOutputData = new ArrayList<HashMap<String,String>>();
-			
-			if(i == 0){	
-				for(HashMap<String, String> map : recordData.recordData){
-					HashMap<String, String> outputRow = new HashMap<String, String>();
+			RecordData recordData = dataList.get(i);
+		
+			int indexFirst = 0, indexSecond = 0;
+				
+			while(indexFirst < outputData.size() && indexSecond < recordData.recordData.size()){
 					
-					for(String s: this.data.recordHeader){
+				HashMap<String,String> mapFirst = outputData.get(indexFirst);
+				HashMap<String,String> mapSecond = recordData.recordData.get(indexSecond);
+				HashMap<String, String> outputRow = new HashMap<String, String>();
 						
-						if(map.containsKey(s)){
-							outputRow.put(s,map.get(s).toString());
+				if (mapFirst.get("ID").compareTo(mapSecond.get("ID")) < 0){
+					for(String s: this.data.recordHeader){
+								
+						if(mapFirst.containsKey(s)){
+							outputRow.put(s,mapFirst.get(s).toString());
 						}
 						else{
 							outputRow.put(s,"");
@@ -55,73 +59,48 @@ public class RecordDataCombination {
 					}
 					tempOutputData.add(outputRow);
 					outputRow = null;
+							
+					indexFirst++;
 				}
-				outputData = tempOutputData;
-				tempOutputData = null;
+				else if(mapFirst.get("ID").compareTo(mapSecond.get("ID")) == 0){
+					for(String s: this.data.recordHeader){
+								
+						if(mapFirst.containsKey(s) && mapFirst.get(s).toString() != ""){
+							outputRow.put(s,mapFirst.get(s).toString());
+						}
+						else if(mapSecond.containsKey(s) && mapSecond.get(s).toString() != ""){
+							outputRow.put(s,mapSecond.get(s).toString());
+						}
+						else{
+							outputRow.put(s,"");
+						}
+					
+					}
+					tempOutputData.add(outputRow);
+					outputRow = null;
+							
+					indexFirst++;
+					indexSecond++;
+				}
+				else if (mapFirst.get("ID").compareTo(mapSecond.get("ID")) > 0) {
+					for(String s: this.data.recordHeader){
+								
+						if(mapSecond.containsKey(s)){
+							outputRow.put(s,mapSecond.get(s).toString());
+						}
+						else{
+							outputRow.put(s,"");
+						}
+					}
+					tempOutputData.add(outputRow);
+					outputRow = null;
+	
+					indexSecond++;
+				}
+							
 			}
-			else{
-				int indexFirst = 0, indexSecond = 0;
 				
-				while(indexFirst < outputData.size() && indexSecond < recordData.recordData.size()){
-					
-					HashMap<String,String> mapFirst = outputData.get(indexFirst);
-					HashMap<String,String> mapSecond = recordData.recordData.get(indexSecond);
-					HashMap<String, String> outputRow = new HashMap<String, String>();
-					
-					if (mapFirst.get("ID").compareTo(mapSecond.get("ID")) < 0){
-						for(String s: this.data.recordHeader){
-							
-							if(mapFirst.containsKey(s)){
-								outputRow.put(s,mapFirst.get(s).toString());
-							}
-							else{
-								outputRow.put(s,"");
-							}
-						}
-						tempOutputData.add(outputRow);
-						outputRow = null;
-						
-						indexFirst++;
-					}
-					else if(mapFirst.get("ID").compareTo(mapSecond.get("ID")) == 0){
-						for(String s: this.data.recordHeader){
-							
-							if(mapFirst.containsKey(s) && mapFirst.get(s).toString() != ""){
-								outputRow.put(s,mapFirst.get(s).toString());
-							}
-							else if(mapSecond.containsKey(s) && mapSecond.get(s).toString() != ""){
-								outputRow.put(s,mapSecond.get(s).toString());
-							}
-							else{
-								outputRow.put(s,"");
-							}
-				
-						}
-						tempOutputData.add(outputRow);
-						outputRow = null;
-						
-						indexFirst++;
-						indexSecond++;
-					}
-					else if (mapFirst.get("ID").compareTo(mapSecond.get("ID")) > 0) {
-						for(String s: this.data.recordHeader){
-							
-							if(mapSecond.containsKey(s)){
-								outputRow.put(s,mapSecond.get(s).toString());
-							}
-							else{
-								outputRow.put(s,"");
-							}
-						}
-						tempOutputData.add(outputRow);
-						outputRow = null;
-
-						indexSecond++;
-					}
-						
-				}
-				
-				if(indexFirst < outputData.size()){
+			if(indexFirst < outputData.size()){
 					
 					while(indexFirst < outputData.size()){
 						HashMap<String,String> mapFirst = outputData.get(indexFirst);
@@ -140,34 +119,32 @@ public class RecordDataCombination {
 						outputRow = null;
 						indexFirst++;
 					}
-				}
-				else if(indexSecond < recordData.recordData.size()){
-					
-					while(indexSecond < recordData.recordData.size()){
-						HashMap<String,String> mapSecond = recordData.recordData.get(indexSecond);
-						HashMap<String, String> outputRow = new HashMap<String, String>();
-						
-						for(String s: this.data.recordHeader){
-							
-							if(mapSecond.containsKey(s)){
-								outputRow.put(s,mapSecond.get(s).toString());
-							}
-							else{
-								outputRow.put(s,"");
-							}
-						}
-						tempOutputData.add(outputRow);
-						outputRow = null;
-						indexSecond++;
-					}
-				}
-				
-				outputData = tempOutputData;
-				tempOutputData = null;
 			}
-			
-			i++;
+			else if(indexSecond < recordData.recordData.size()){
+					
+				while(indexSecond < recordData.recordData.size()){
+					HashMap<String,String> mapSecond = recordData.recordData.get(indexSecond);
+					HashMap<String, String> outputRow = new HashMap<String, String>();
+						
+					for(String s: this.data.recordHeader){
+							
+						if(mapSecond.containsKey(s)){
+							outputRow.put(s,mapSecond.get(s).toString());
+						}
+						else{
+							outputRow.put(s,"");
+						}
+					}
+					tempOutputData.add(outputRow);
+					outputRow = null;
+					indexSecond++;
+				}
+			}
+				
+			outputData = tempOutputData;
+			tempOutputData = null;
 		}
+		
 		this.data.recordData = outputData;
 		outputData = null;
 	}

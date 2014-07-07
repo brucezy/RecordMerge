@@ -14,7 +14,7 @@ public class RecordFileReaderFactory {
 			instance = new CSVRecordFileReader();
 			break;
 		default:
-			System.err.println("Oops, the type of the file doesn't support right now, stay tuned");
+			System.err.println("Doesn't support File Type:" + fileType.toUpperCase() + ", Skip to process the file");
 			instance = null;
 			break;
 		}

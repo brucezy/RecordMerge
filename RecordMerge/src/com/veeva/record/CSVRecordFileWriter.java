@@ -16,16 +16,15 @@ public class CSVRecordFileWriter extends RecordFileWriter {
 	private OutputStreamWriter outputStream;
 	
 	public CSVRecordFileWriter() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	@Override
-	public void initialize(File output) {
+	public void initialize(File output){
 		try {
 			outputStream = new OutputStreamWriter(new FileOutputStream(output));
 			this.writer = new CSVWriter(outputStream,',', CSVWriter.DEFAULT_QUOTE_CHARACTER);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -48,12 +47,11 @@ public class CSVRecordFileWriter extends RecordFileWriter {
 	}
 
 	@Override
-	public void fileClose() {
+	public void closeFile() {
 		
 		try {
 			outputStream.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
