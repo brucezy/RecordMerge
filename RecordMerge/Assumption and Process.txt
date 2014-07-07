@@ -1,0 +1,16 @@
+
+Assumption and Process:
+-----------------------
+1.If a file has no header information, then skip the file processing and continue to process next file;
+2.If header has no "ID" field, then skip the file processing and continue to process next file;
+3. Didn't do any value confliction checking at present, assume all values of a specific key(for example value of "Name")are same in different files.
+
+Output:
+-------
+"combined.csv" file is generated in root directory of the project
+
+More Consideration for scalability:
+-----------------------------------
+At present, a Factory class is used to create correct file reader and file writer for diffrent types of file. File reader and file writer instances are created according to file extension and hard coded in current factory implementation, which is a simple way to handle scalability to handle multiple file types.
+An alternative way is using a configuration file, which contains each file type and its corresponding Reader and Writer classes mapping.  At application initialization phase, read this configuration into a HashMap, then Factory class will use it to create correct Reader and Writer. When new type of file handling is required, develop can easily add it without change anything of Factory class implementation. 
+

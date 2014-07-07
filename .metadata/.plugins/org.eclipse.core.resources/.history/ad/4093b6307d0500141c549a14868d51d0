@@ -1,0 +1,43 @@
+package com.veeva.record;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+
+public class RecordData implements Comparator<HashMap<String, String>>{
+		
+		public ArrayList<String> recordHeader;
+		public ArrayList<HashMap<String,String>> recordData;
+		
+		class MapComparator implements Comparator<HashMap<String, String>>
+		{
+		    private final String key;
+
+		    public MapComparator(String key)
+		    {
+		        this.key = key;
+		    }
+
+			@Override
+			public int compare(HashMap<String, String> arg0,
+					HashMap<String, String> arg1) {
+				return Integer.parseInt(arg0.get(this.key).toString())- Integer.parseInt(arg1.get(this.key).toString());
+			}
+		}
+		
+		public RecordData(){
+			this.recordHeader = new ArrayList<String>();
+			this.recordData = new ArrayList<HashMap<String,String>>();
+		}
+
+		@Override
+		public int compare(HashMap<String, String> arg0,
+				HashMap<String, String> arg1) {
+			return Integer.parseInt(arg0.get("ID").toString())- Integer.parseInt(arg1.get("ID").toString());
+		}
+		
+		public void sortByKey(String key){
+			Collections.sort
+			
+		}
+}

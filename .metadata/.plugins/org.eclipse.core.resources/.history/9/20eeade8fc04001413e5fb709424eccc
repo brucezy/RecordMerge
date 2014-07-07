@@ -1,0 +1,29 @@
+package com.veeva.record;
+
+import java.io.File;
+
+public class CSVRecordFileReader extends RecordFileReader {
+
+	public CSVRecordFileReader() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void initialize(File input) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void readHeader() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void readData() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

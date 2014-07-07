@@ -1,0 +1,41 @@
+package com.veeva.record;
+
+import java.util.ArrayList;
+
+public class RecordDataCombination {
+	
+	public RecordData data;
+	private ArrayList<RecordData> dataList;
+	
+	public RecordDataCombination(ArrayList<RecordData> recordDataList) {
+		this.data = new RecordData();
+		this.dataList = recordDataList;
+	}
+	
+	public void consolidateRecordHeaders(){
+		int i = 0;
+		for(RecordData recordData: dataList){
+			
+			//merge header
+			if(i == 0)
+			{
+				this.data.recordHeader = (ArrayList<String>) recordData.recordHeader.clone();
+			} else {
+				
+				for(String s: recordModle.recordHeader){
+					if(!outputRecord.recordHeader.contains(s)){
+						outputRecord.recordHeader.add(s);
+					}
+				}
+			}
+			
+			i++;
+		}
+		
+	}
+	
+	public void consolidateRecordEntries(){
+		
+	}
+
+}

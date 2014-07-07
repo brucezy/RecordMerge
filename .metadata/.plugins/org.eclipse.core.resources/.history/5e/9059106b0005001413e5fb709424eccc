@@ -1,0 +1,29 @@
+package com.veeva.record;
+
+import java.io.File;
+
+public class CSVRecordFileWriter extends RecordFileWriter {
+
+	public CSVRecordFileWriter() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void initialize(File output) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void writeHeader() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void writeData() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

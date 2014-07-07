@@ -1,0 +1,22 @@
+package com.veeva.record;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class RecordData implements Comparable<HashMap<String, String>> {
+		
+		public ArrayList<String> recordHeader;
+		public ArrayList<HashMap<String,String>> recordData;
+		
+		public RecordData(){
+			this.recordHeader = new ArrayList<String>();
+			this.recordData = new ArrayList<HashMap<String,String>>();
+		}
+
+		@Override
+		public int compareTo(HashMap<String, String> arg0) {
+
+			return Integer.parseInt(this.get("ID").toString())- Integer.parseInt(obj2.get("ID").toString());;
+		}
+
+}

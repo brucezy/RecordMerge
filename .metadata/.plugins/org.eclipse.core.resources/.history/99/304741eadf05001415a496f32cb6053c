@@ -1,0 +1,26 @@
+
+public class RecordFileReaderFactory {
+
+	
+	public RecordFileReader instance = null;
+	
+	public static RecordFileReader RecordFileReaderFactory(String fileType) {
+		switch(fileType){
+		case "HTML":
+			return new HTMLRecordFileReader();
+			break;
+		case "CSV":
+			return new CSVRecordFileReader();
+			break;
+		default:
+			System.err.println("Doesn't support File Type:" + fileType.toUpperCase() + ", Skip to process the file");
+			return null;
+			break;
+		}
+	}
+	
+	public RecordFileReader getInstance(){
+		return instance;
+	}
+
+}

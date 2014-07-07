@@ -1,0 +1,8 @@
+
+public class RecordFileWriter {
+
+	public RecordFileWriter() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

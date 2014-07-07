@@ -1,0 +1,17 @@
+package com.veeva.record;
+
+import java.io.File;
+
+public abstract class RecordFileReader {
+
+	public RecordFileReader() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	abstract public void initialize(File input);
+	
+	abstract public void readHeader(File input);
+	
+	abstract public void readData(File input);
+
+}

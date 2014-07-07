@@ -1,0 +1,8 @@
+
+public class HTMLRecordFileReader {
+
+	public HTMLRecordFileReader() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

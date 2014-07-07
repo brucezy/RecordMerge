@@ -1,0 +1,8 @@
+
+public class CSVRecordFileWriter {
+
+	public CSVRecordFileWriter() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,12 @@
+package com.veeva.record;
+
+import java.util.ArrayList;
+
+public class RecordDataCombination {
+	
+	public RecordData data;
+	public RecordDataCombination(ArrayList<RecordData> recordDataList) {
+		this.data = new RecordData();
+	}
+
+}

@@ -1,0 +1,29 @@
+package com.veeva.record;
+
+import java.io.File;
+
+public class HTMLRecordFileReader extends RecordFileReader {
+
+	public HTMLRecordFileReader() {
+		super();
+	}
+
+	@Override
+	public void initialize(File input) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void readHeader(File input) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void readData(File input) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

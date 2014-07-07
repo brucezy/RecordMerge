@@ -1,0 +1,11 @@
+package com.veeva.record;
+
+import java.util.Comparator;
+
+public class HashMapComparator implements Comparator<T> {
+
+	public HashMapComparator() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,41 @@
+package com.veeva.record;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import au.com.bytecode.opencsv.CSVReader;
+
+public class CSVRecordFileWriter extends RecordFileWriter {
+
+	public CSVRecordFileWriter() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void initialize(File output) {
+		try {
+			OutputStreamWriter inputStream = new OutputStreamWriter(new FileInputStream(input));
+			this.reader = new CSVReader(inputStream);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void writeHeader() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void writeData() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

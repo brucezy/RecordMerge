@@ -1,0 +1,9 @@
+package com.veeva.record;
+
+public abstract class RecordFileWriter {
+
+	public RecordFileWriter() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,8 @@
+
+public class RecordFileReaderFactory {
+
+	public RecordFileReaderFactory() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

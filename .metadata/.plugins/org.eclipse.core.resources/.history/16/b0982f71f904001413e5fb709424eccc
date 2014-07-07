@@ -1,0 +1,9 @@
+package com.veeva.record;
+
+public class RecordData {
+
+	public RecordData() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
